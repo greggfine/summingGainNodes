@@ -10,6 +10,7 @@ const sineRange = document.getElementById('sine-range');
 const triRange = document.getElementById('tri-range');
 const squareRange = document.getElementById('square-range');
 const sawRange = document.getElementById('saw-range');
+const masterFilt = document.getElementById('master-filter');
 const masterOut = document.getElementById('master-out');
 
 let oscSine;
@@ -33,7 +34,7 @@ class oscBuilder {
 		this.osc.frequency.value = this.freq;
 		this.amp = this.context.createGain();
 		this.osc.connect(this.amp);
-		this.amp.connect(masterGainOut);
+		this.amp.connect(masterFilter);
 	}
 
 	play() {
@@ -49,60 +50,48 @@ class oscBuilder {
 	slider() {
 		setInterval(() => {
 			this.amp.gain.value = this.choice.value;
+			// this.amp.gain.setValueAtTime(this.amp.gain.value, this.context.currentTime + 2);
 		}, 10)
 	}
 }
 
 function play() {
 		if(!bool) {
-			 oscSine = new oscBuilder(ctx, 'sine', 261.63, sineRange);
+			oscSine = new oscBuilder(ctx, 'sine', 261.63, sineRange);
 			oscSine.play();	
 
-			 oscTri = new oscBuilder(ctx, 'triangle', 329.63,triRange);
+			oscTri = new oscBuilder(ctx, 'triangle', 329.63,triRange);
 			oscTri.play();	
 
-			 oscSquare = new oscBuilder(ctx, 'square', 392.00, squareRange);
+			oscSquare = new oscBuilder(ctx, 'square', 392.00, squareRange);
 			oscSquare.play();
 	
-			 oscSaw = new oscBuilder(ctx, 'sawtooth', 523.25,sawRange);
+			oscSaw = new oscBuilder(ctx, 'sawtooth', 523.25,sawRange);
 			oscSaw.play();
 		}
  	}
 
 
 function stop() {
-	oscSine.stop()
-	oscTri.stop()
-	oscSquare.stop()
-	oscSaw.stop()
+	oscSine.stop();
+	oscTri.stop();
+	oscSquare.stop();
+	oscSaw.stop();
 }
 
+const masterFilter = ctx.createBiquadFilter();
 const masterGainOut = ctx.createGain();
+masterFilter.type = "lowpass";
+masterFilter.frequency.value = 1000;
+masterFilter.connect(masterGainOut);
+
+
 masterGainOut.connect(ctx.destination);
+
+setInterval(() => {
+			masterFilter.frequency.value = masterFilt.value;
+		}, 10)
 
 setInterval(() => {
 			masterGainOut.gain.value = masterOut.value;
 		}, 10)
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
-
-		
-
-
-
-
-
-
-

@@ -30,7 +30,6 @@ h1 {
                0 5px 10px rgba(0,0,0,.25),
                0 10px 10px rgba(0,0,0,.2),
                0 20px 20px rgba(0,0,0,.15);
-
 }
 
 .range-sliders h2 {
@@ -79,7 +78,7 @@ button {
 }
 
 .range-sliders {
-	margin-top: 40px;
+	margin-top: 20px;
 	margin-left: auto;
 	margin-right: auto;
 	display: flex;
@@ -97,7 +96,7 @@ button {
 	border: 5px solid;
 }
 
-#master-out {
+#master-out, #master-filter {
 	border: 5px solid;
 	border-radius: 10px;
 	background-image: url('http://sciencerocks.info/wp-content/uploads/2016/09/popular-dark-wood-floor-pattern-vertical-wooden-floor-texture-0.jpg');
