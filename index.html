@@ -14,23 +14,25 @@
 		<h1>Summing Gain Nodes</h1>
 	</header>
 
-	<button>Play/Stop</button>	
+	<div class="button-group">
+		<button id="play">Play</button>	
+		<button id="stop">Stop</button>	
+	</div>
 
 	<div class="range-sliders">
-		<h2>Sine</h2>
-		<input type="range">
-		<h2>Square</h2>
-		<input type="range">
+		<h2 >Sine</h2>
+		<input id="sine-range" type="range"   min="0" max=".5" step="0.01">
 		<h2>Triangle</h2>
-		<input type="range">
+		<input id="tri-range" type="range"   min="0" max=".5" step="0.01">
+		<h2>Square</h2>
+		<input id="square-range" type="range"   min="0" max=".5" step="0.01">
 		<h2>Sawtooth</h2>
-		<input type="range" id="saw-range" value = '.5' min='0'
-		max='100'>
+		<input  id="saw-range" type="range"  min="0" max=".5" step="0.01">
 	</div>
 
 	<div class="master-section">
 		<h2>Master Output</h2>
-		<input type="range" id="master-out">
+		<input id="master-out" type="range"  value=".01" min="0" max=".5" step="0.01">
 	</div>
 
 </div>
@@ -38,3 +40,5 @@
 <script src="main.js"></script>	
 </body>
 </html>
+
+

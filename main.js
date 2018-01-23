@@ -1,53 +1,107 @@
 const ctx = new AudioContext();
 
-const btn = document.getElementsByTagName('button')[0];
+const btn = document.getElementById('play');
 btn.addEventListener('click', play);
 
-const sawRangeVal = document.getElementById('saw-range').defaultValue;
+const stopBtn = document.getElementById('stop');
+stopBtn.addEventListener('click', stop);
+
+const sineRange = document.getElementById('sine-range');
+const triRange = document.getElementById('tri-range');
+const squareRange = document.getElementById('square-range');
 const sawRange = document.getElementById('saw-range');
+const masterOut = document.getElementById('master-out');
 
+let oscSine;
+let oscTri;
+let oscSquare;
+let oscSaw;
 
-let osc = false;
+let bool = false;
+
+class oscBuilder {
+	constructor(context, type, freq, choice, bool) {
+		this.context = context;
+		this.type = type;
+		this.freq = freq;
+		this.choice = choice;
+	}
+
+	init() {
+		this.osc = this.context.createOscillator();
+		this.osc.type = this.type;
+		this.osc.frequency.value = this.freq;
+		this.amp = this.context.createGain();
+		this.osc.connect(this.amp);
+		this.amp.connect(masterGainOut);
+	}
+
+	play() {
+		this.init();
+		this.slider();
+		this.osc.start(this.context.currentTime);
+	}
+
+	stop() {
+		this.osc.stop(this.context.currentTime)
+	}
+
+	slider() {
+		setInterval(() => {
+			this.amp.gain.value = this.choice.value;
+		}, 10)
+	}
+}
 
 function play() {
-	if(!osc) {
-		oscSine = oscCreator('sine', 261.63);
-		oscSine.connect(ctx.destination);
+		if(!bool) {
+			 oscSine = new oscBuilder(ctx, 'sine', 261.63, sineRange);
+			oscSine.play();	
 
-		oscTri = oscCreator('triangle', 329.63);
-		oscTri.connect(ctx.destination);
+			 oscTri = new oscBuilder(ctx, 'triangle', 329.63,triRange);
+			oscTri.play();	
 
-		oscSquare = oscCreator('square', 392.00);
-		oscSquare.connect(ctx.destination);
-
-		oscSaw = oscCreator('sawtooth', 523.25);
-		oscSaw.connect(ctx.destination);
-	} else {
- 		oscSine.stop(ctx.currentTime);
- 		oscTri.stop(ctx.currentTime);
- 		oscSquare.stop(ctx.currentTime);
- 		oscSaw.stop(ctx.currentTime);
- 		osc = false;
- 	}
-}
-
-function oscCreator(type, freq) {
-	osc = ctx.createOscillator();
-	osc.type = type;
-	osc.frequency.value = freq;
-	osc.start(ctx.currentTime);
-
-	let amp = ctx.createGain();
+			 oscSquare = new oscBuilder(ctx, 'square', 392.00, squareRange);
+			oscSquare.play();
 	
+			 oscSaw = new oscBuilder(ctx, 'sawtooth', 523.25,sawRange);
+			oscSaw.play();
+		}
+ 	}
 
-	sawRange.addEventListener('change', function(e) {
-		amp.gain.value = e.target.value/defaultValue;
-	})
 
-	var connectedOsc = osc.connect(amp);
-
-	return connectedOsc;
+function stop() {
+	oscSine.stop()
+	oscTri.stop()
+	oscSquare.stop()
+	oscSaw.stop()
 }
+
+const masterGainOut = ctx.createGain();
+masterGainOut.connect(ctx.destination);
+
+setInterval(() => {
+			masterGainOut.gain.value = masterOut.value;
+		}, 10)
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		
+
+
+
 
 
 
