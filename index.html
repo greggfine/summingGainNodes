@@ -5,17 +5,35 @@
 	<title>Summing Gain Nodes</title>
 	<link rel="stylesheet" href="styles.css">
 
-
-	<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
-<script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-<script src="semantic/dist/semantic.min.js"></script>
 </head>
 <body>
 
+<div class="container">
 
+	<header>
+		<h1>Summing Gain Nodes</h1>
+	</header>
+
+	<button>Play/Stop</button>	
+
+	<div class="range-sliders">
+		<h2>Sine</h2>
+		<input type="range">
+		<h2>Square</h2>
+		<input type="range">
+		<h2>Triangle</h2>
+		<input type="range">
+		<h2>Sawtooth</h2>
+		<input type="range" id="saw-range" value = '.5' min='0'
+		max='100'>
+	</div>
+
+	<div class="master-section">
+		<h2>Master Output</h2>
+		<input type="range" id="master-out">
+	</div>
+
+</div>
 
 <script src="main.js"></script>	
 </body>
