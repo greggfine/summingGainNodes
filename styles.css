@@ -2,6 +2,7 @@ body {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: Arial;
 }
 
 .container {
@@ -9,14 +10,29 @@ body {
 	margin: auto;
 }
 
+header {
+	margin-top: 60px;
+}
+
 h1 {
 	text-align: center;
+	font-size: 3rem;
+	text-shadow: 3px 2px 5px #0000002e;
+}
+
+.range-sliders h2 {
+	border: 3px solid;
+	border-radius: 20px;
+	width: 100px;
+	padding: 6px;
+	text-align: center;
+	font-size: 1rem;
+	background-color: yellow;
 }
 
 .button-group {
 	display: flex;
 }
-
 
 button {
 	padding: 10px;
@@ -51,10 +67,20 @@ button {
 
 .range-sliders {
 	margin-top: 40px;
+	margin-left: auto;
+	margin-right: auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	transform: rotate(270deg);
+	width: 320px;
 }
+
+#master-out {
+	border: 5px solid;
+	border-radius: 10px
+}
+
 
 input[type=range] {
 	padding: 40px;
@@ -147,5 +173,4 @@ input[type=range]:focus::-ms-fill-lower {
 input[type=range]:focus::-ms-fill-upper {
   background: #45abb0;
 }
-
 
