@@ -89,9 +89,9 @@ masterFilter.connect(masterGainOut);
 masterGainOut.connect(ctx.destination);
 
 setInterval(() => {
-			masterFilter.frequency.value = masterFilt.value;
-		}, 10)
+		masterFilter.frequency.value = masterFilt.value;
+}, 10)
 
 setInterval(() => {
 			masterGainOut.gain.value = masterOut.value;
-		}, 10)
+}, 10)
