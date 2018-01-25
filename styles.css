@@ -100,6 +100,18 @@ button {
 	border: 5px solid;
 }
 
+.keyboard {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+.keyboard-note {
+  border:1px solid #424242;
+  padding: 30px;
+}
+
+
 #master-out, #master-filter {
 	border: 5px solid;
 	border-radius: 10px;
